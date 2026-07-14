@@ -1,0 +1,14 @@
+{% extends "layouts/nrw.html" %}
+
+{% set pageName = "Check your answers" %}
+{% set backUrl = "/nrw/recurring-event-summary" %}
+
+{% block content %}
+  <div class="nrw-form-width">
+    <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+    <p class="govuk-body">This is the end of the linked land use booking journey.</p>
+    <div class="nrw-actions">
+      <a class="nrw-button nrw-button--secondary" href="{{ backUrl }}">Back</a>
+    </div>
+  </div>
+{% endblock %}

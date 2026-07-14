@@ -1,0 +1,44 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% set pageName = "When do you want to use this land?" %}
+{% set backUrl = "/nrw/facilities" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/when-use-land" method="post" novalidate>
+    <div class="nrw-form-width">
+      {{
+        govukRadios({
+          name: "recurring-event",
+          idPrefix: "recurring-event",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l nrw-question"
+            }
+          },
+          hint: {
+            text: "Tell us when this event happens and if it repeats",
+            classes: "govuk-body nrw-body-hint"
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes - this is a recurring event",
+              checked: data["recurring-event"] == "yes"
+            },
+            {
+              value: "no",
+              text: "No - this is a one off event",
+              checked: data["recurring-event"] == "no"
+            }
+          ]
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

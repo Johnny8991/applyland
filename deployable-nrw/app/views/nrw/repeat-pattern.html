@@ -1,0 +1,79 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% set pageName = "How often does it repeat?" %}
+{% set backUrl = "/nrw/when-use-land" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/repeat-pattern" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+      <p class="govuk-body nrw-body-hint">Tell us when this event happens and if it repeats</p>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label nrw-label-strong" for="repeat-interval">It repeats every</label>
+        <div class="nrw-repeat-row">
+          <input class="govuk-input nrw-input-small" id="repeat-interval" name="repeat-interval" type="text" inputmode="numeric" value="{{ data['repeat-interval'] | default('1') }}">
+          <select class="govuk-select nrw-select-medium" id="repeat-period" name="repeat-period">
+            <option value="day" {% if data["repeat-period"] == "day" %}selected{% endif %}>Day</option>
+            <option value="week" {% if data["repeat-period"] == "week" or not data["repeat-period"] %}selected{% endif %}>Week</option>
+            <option value="month" {% if data["repeat-period"] == "month" %}selected{% endif %}>Month</option>
+          </select>
+        </div>
+      </div>
+
+      {{
+        govukCheckboxes({
+          name: "repeat-days",
+          idPrefix: "repeat-days",
+          fieldset: {
+            legend: {
+              text: "Which day does it happen?",
+              classes: "nrw-label-strong"
+            }
+          },
+          items: [
+            {
+              value: "monday",
+              text: "Mon",
+              checked: data["repeat-days"] and "monday" in data["repeat-days"]
+            },
+            {
+              value: "tuesday",
+              text: "Tue",
+              checked: (data["repeat-days"] and "tuesday" in data["repeat-days"]) or not data["repeat-days"]
+            },
+            {
+              value: "wednesday",
+              text: "Wed",
+              checked: data["repeat-days"] and "wednesday" in data["repeat-days"]
+            },
+            {
+              value: "thursday",
+              text: "Thu",
+              checked: data["repeat-days"] and "thursday" in data["repeat-days"]
+            },
+            {
+              value: "friday",
+              text: "Fri",
+              checked: data["repeat-days"] and "friday" in data["repeat-days"]
+            },
+            {
+              value: "saturday",
+              text: "Sat",
+              checked: data["repeat-days"] and "saturday" in data["repeat-days"]
+            },
+            {
+              value: "sunday",
+              text: "Sun",
+              checked: data["repeat-days"] and "sunday" in data["repeat-days"]
+            }
+          ]
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

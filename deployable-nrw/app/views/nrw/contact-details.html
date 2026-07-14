@@ -1,0 +1,87 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% set pageName = "Who can we speak to about this application?" %}
+{% set backUrl = "/nrw/activity-type" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/contact-details" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question nrw-question--two-lines">{{ pageName }}</h2>
+      <p class="govuk-body nrw-label-strong">Enter details</p>
+
+      {% set requiredHtml %}<span class="nrw-required">*</span>{% endset %}
+
+      {{
+        govukInput({
+          id: "contact-full-name",
+          name: "contact-full-name",
+          value: data["contact-full-name"],
+          label: {
+            html: "Full name " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "contact-role",
+          name: "contact-role",
+          value: data["contact-role"],
+          label: {
+            html: "Your role " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "contact-address",
+          name: "contact-address",
+          value: data["contact-address"],
+          label: {
+            html: "Address " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "contact-postcode",
+          name: "contact-postcode",
+          value: data["contact-postcode"],
+          label: {
+            html: "Postcode " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "contact-phone",
+          name: "contact-phone",
+          value: data["contact-phone"],
+          label: {
+            html: "Phone number " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "contact-email",
+          name: "contact-email",
+          value: data["contact-email"],
+          label: {
+            html: "Email " + requiredHtml
+          },
+          classes: "nrw-input-wide",
+          type: "email"
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

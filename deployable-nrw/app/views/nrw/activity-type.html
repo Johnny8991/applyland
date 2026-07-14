@@ -1,0 +1,53 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% set pageName = "What do you want to do?" %}
+{% set backUrl = "/nrw/organisation-details" %}
+{% set taskLinkText = "Go back to your applications" %}
+
+{% block content %}
+  <form action="/nrw/activity-type" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+      {{
+        govukSelect({
+          id: "activity-type",
+          name: "activity-type",
+          label: {
+            text: "Start typing",
+            classes: "nrw-label-strong"
+          },
+          classes: "nrw-select-wide",
+          items: [
+            {
+              value: "",
+              text: ""
+            },
+            {
+              value: "hold-event",
+              text: "Hold an event",
+              selected: data["activity-type"] == "hold-event"
+            },
+            {
+              value: "film-on-land",
+              text: "Film on NRW land",
+              selected: data["activity-type"] == "film-on-land"
+            },
+            {
+              value: "install-temporary-facilities",
+              text: "Install temporary facilities",
+              selected: data["activity-type"] == "install-temporary-facilities"
+            },
+            {
+              value: "other",
+              text: "Other",
+              selected: data["activity-type"] == "other"
+            }
+          ]
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

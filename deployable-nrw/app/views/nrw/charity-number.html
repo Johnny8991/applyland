@@ -1,0 +1,31 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% set pageName = "What is your charity number?" %}
+{% set backUrl = "/nrw/event-name" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/charity-number" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+      <p class="govuk-body">
+        <a class="govuk-link nrw-link-strong" href="https://register-of-charities.charitycommission.gov.uk/" target="_blank" rel="noopener noreferrer">Check the charities' register (opens in a new tab)</a>
+      </p>
+      {{
+        govukInput({
+          id: "charity-number",
+          name: "charity-number",
+          value: data["charity-number"],
+          label: {
+            text: pageName,
+            classes: "govuk-visually-hidden"
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

@@ -1,0 +1,9 @@
+{
+  "serviceName": "Apply to use land",
+  "useServiceNavigation": false,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}

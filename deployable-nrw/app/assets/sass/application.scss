@@ -1,0 +1,618 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+// 
+
+// Add extra styles here
+
+$nrw-teal: #007485;
+$nrw-teal-light: #148292;
+$nrw-green: #358728;
+$nrw-green-dark: #2d7423;
+$nrw-grey: #58595b;
+$nrw-page-grey: #f4f4f4;
+$nrw-link: #007485;
+$govuk-focus: #ffdd00;
+$nrw-font-family: "Gotham Rounded", "Gotham Rounded SSm A", "Gotham Rounded SSm B", "Arial Rounded MT Bold", Arial, sans-serif;
+
+.nrw-template {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #2f2f2f;
+  background: #fff;
+  font-family: $nrw-font-family;
+}
+
+.nrw-template *,
+.nrw-template button,
+.nrw-template input,
+.nrw-template select,
+.nrw-template textarea {
+  font-family: $nrw-font-family;
+}
+
+.nrw-width-container {
+  width: calc(100% - 60px);
+  max-width: 990px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.nrw-header {
+  flex: 0 0 auto;
+  height: 72px;
+  background: $nrw-page-grey;
+}
+
+.nrw-header .nrw-width-container {
+  max-width: 1020px;
+}
+
+.nrw-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.nrw-header__logo {
+  display: block;
+  width: 298px;
+  height: 72px;
+}
+
+.nrw-header__logo:focus,
+.nrw-header__link:focus,
+.nrw-link-strong:focus {
+  color: #0b0c0c;
+  outline: 3px solid $govuk-focus;
+  background: $govuk-focus;
+  box-shadow: 0 -2px $govuk-focus, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
+.nrw-header__logo img {
+  display: block;
+  width: 298px;
+  height: 72px;
+}
+
+.nrw-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  margin-right: 4px;
+}
+
+.nrw-header__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #2f2f2f;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.nrw-header__link:first-child {
+  color: $nrw-link;
+}
+
+.nrw-header__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nrw-header__signin-icon {
+  flex: 0 0 auto;
+}
+
+.nrw-main {
+  flex: 1 0 auto;
+}
+
+.nrw-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 123px;
+  background: $nrw-teal;
+}
+
+.nrw-hero::before,
+.nrw-hero::after {
+  content: "";
+  position: absolute;
+  top: 31px;
+  right: -20px;
+  width: 470px;
+  height: 150px;
+  border-top: 14px solid rgba(255, 255, 255, .07);
+  border-left: 14px solid rgba(255, 255, 255, .07);
+  transform: rotate(34deg) skewX(-17deg);
+  transform-origin: top right;
+}
+
+.nrw-hero::after {
+  top: -30px;
+  right: 164px;
+  width: 355px;
+  height: 130px;
+}
+
+.nrw-hero__inner {
+  position: relative;
+  z-index: 1;
+  padding-top: 27px;
+  padding-bottom: 20px;
+}
+
+.nrw-hero__title {
+  margin: 0;
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.18;
+}
+
+.nrw-content {
+  padding-top: 43px;
+  padding-bottom: 74px;
+}
+
+.nrw-form-width {
+  max-width: 640px;
+}
+
+.nrw-form-width-wide {
+  max-width: 770px;
+}
+
+.nrw-question,
+.nrw-template .govuk-fieldset__legend.nrw-question {
+  display: block;
+  margin: 0 0 24px;
+  color: $nrw-grey;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.nrw-question--two-lines {
+  max-width: 610px;
+}
+
+.nrw-label-strong,
+.nrw-template .govuk-hint.nrw-label-strong,
+.nrw-template .govuk-label.nrw-label-strong {
+  margin-bottom: 18px;
+  color: #303030;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.nrw-template .govuk-body,
+.nrw-template .govuk-label,
+.nrw-template .govuk-hint,
+.nrw-template .govuk-radios__label,
+.nrw-template .govuk-checkboxes__label {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.nrw-template .govuk-form-group {
+  margin-bottom: 26px;
+}
+
+.nrw-template .govuk-input,
+.nrw-template .govuk-select,
+.nrw-template .govuk-textarea {
+  border: 2px solid #242424;
+  border-radius: 0;
+  color: #1d1d1d;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.nrw-template .govuk-input:focus,
+.nrw-template .govuk-select:focus,
+.nrw-template .govuk-textarea:focus {
+  outline: 3px solid $govuk-focus;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px;
+}
+
+.nrw-input-wide {
+  width: 640px;
+  max-width: 100%;
+  height: 48px;
+}
+
+.nrw-select-wide {
+  width: 568px;
+  max-width: 100%;
+  height: 48px;
+}
+
+.nrw-textarea {
+  width: 770px;
+  max-width: 100%;
+  min-height: 179px;
+  resize: vertical;
+}
+
+.nrw-required {
+  color: #d4351c;
+}
+
+.nrw-link-strong {
+  color: $nrw-link;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nrw-link-strong:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nrw-template .govuk-radios,
+.nrw-template .govuk-checkboxes {
+  margin-top: 0;
+}
+
+.nrw-template .govuk-radios__item {
+  min-height: 40px;
+  margin-bottom: 22px;
+}
+
+.nrw-template .govuk-radios__label {
+  padding-top: 9px;
+  padding-left: 17px;
+}
+
+.nrw-template .govuk-checkboxes__item {
+  min-height: 40px;
+  margin-bottom: 24px;
+}
+
+.nrw-template .govuk-checkboxes__label {
+  padding-top: 9px;
+  padding-left: 17px;
+}
+
+.nrw-template .govuk-checkboxes__conditional {
+  margin-left: 56px;
+  padding-left: 0;
+  border-left: 0;
+}
+
+.nrw-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.nrw-template .govuk-form-group + .nrw-actions,
+.nrw-template .govuk-radios + .govuk-form-group + .nrw-actions,
+.nrw-template .govuk-checkboxes + .nrw-actions {
+  margin-top: 24px;
+}
+
+.nrw-button,
+.nrw-template .govuk-button.nrw-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 48px;
+  margin: 0;
+  padding: 9px 16px 8px;
+  border: 2px solid $nrw-green;
+  border-radius: 4px;
+  background: $nrw-green;
+  box-shadow: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nrw-button:hover,
+.nrw-template .govuk-button.nrw-button:hover {
+  background: $nrw-green-dark;
+  border-color: $nrw-green-dark;
+}
+
+.nrw-button:focus,
+.nrw-template .govuk-button.nrw-button:focus {
+  outline: 3px solid $govuk-focus;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0b0c0c;
+}
+
+.nrw-button--secondary {
+  min-width: 80px;
+  background: #fff;
+  color: $nrw-green;
+}
+
+.nrw-button--secondary:hover {
+  background: #f3f9f1;
+  color: $nrw-green-dark;
+}
+
+.nrw-intro {
+  margin-bottom: 26px;
+}
+
+.nrw-intro p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.nrw-body-hint {
+  margin-top: -13px;
+  margin-bottom: 26px;
+}
+
+.nrw-bullets {
+  margin: 0 0 0 18px;
+  padding: 0;
+  list-style-position: outside;
+}
+
+.nrw-character-message {
+  margin-top: 8px;
+}
+
+.nrw-repeat-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nrw-input-small {
+  width: 54px;
+  height: 48px;
+  text-align: center;
+}
+
+.nrw-select-medium {
+  width: 224px;
+  height: 48px;
+}
+
+.nrw-time-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px 64px;
+  margin-bottom: 30px;
+}
+
+.nrw-time-section {
+  min-width: 134px;
+}
+
+.nrw-time-section .nrw-label-strong {
+  margin-bottom: 24px;
+}
+
+.nrw-time-row {
+  display: flex;
+  gap: 16px;
+}
+
+.nrw-time-row .govuk-form-group {
+  margin-bottom: 0;
+}
+
+.nrw-time-input {
+  width: 54px;
+  height: 48px;
+  text-align: center;
+}
+
+.nrw-template .govuk-date-input__input {
+  height: 48px;
+}
+
+.nrw-template .govuk-date-input__label {
+  color: #333;
+  font-size: 17px;
+}
+
+.nrw-template .govuk-radios__conditional .govuk-date-input {
+  margin-bottom: 30px;
+}
+
+.nrw-inset-text {
+  width: 600px;
+  max-width: 100%;
+  margin: 32px 0 34px;
+  border-left-color: $nrw-link;
+  color: #333;
+}
+
+.nrw-summary-list {
+  width: 640px;
+  max-width: 100%;
+  margin: 33px 0 48px;
+}
+
+.nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__row {
+  min-height: 57px;
+  border-bottom-color: #a6a6a6;
+}
+
+.nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__row:first-child {
+  border-top: 1px solid #a6a6a6;
+}
+
+.nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__key,
+.nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__value,
+.nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__actions {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__key {
+  width: 178px;
+}
+
+.nrw-summary-actions {
+  margin-top: 0;
+}
+
+.nrw-footer {
+  flex: 0 0 auto;
+  border-top: 4px solid $nrw-green;
+  background: $nrw-grey;
+  color: #fff;
+}
+
+.nrw-footer .nrw-width-container {
+  padding-top: 34px;
+  padding-bottom: 33px;
+}
+
+.nrw-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nrw-footer__links li {
+  padding-right: 24px;
+  padding-left: 24px;
+  border-right: 1px solid rgba(255, 255, 255, .7);
+}
+
+.nrw-footer__links li:first-child {
+  padding-left: 0;
+}
+
+.nrw-footer__links li:last-child {
+  border-right: 0;
+}
+
+.nrw-footer__links a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.nrw-footer__links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nrw-footer__links a:focus {
+  color: #0b0c0c;
+  outline: 3px solid $govuk-focus;
+  background: $govuk-focus;
+  box-shadow: 0 -2px $govuk-focus, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
+.nrw-footer__rule {
+  height: 1px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, .35);
+}
+
+.nrw-footer__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nrw-footer__meta img {
+  display: block;
+  width: 298px;
+  height: 72px;
+}
+
+.nrw-footer__meta p {
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+@media (max-width: 720px) {
+  .nrw-width-container {
+    width: calc(100% - 32px);
+  }
+
+  .nrw-header,
+  .nrw-header__inner {
+    height: auto;
+    min-height: 72px;
+  }
+
+  .nrw-header__inner {
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .nrw-header__logo,
+  .nrw-header__logo img {
+    width: 224px;
+    height: auto;
+  }
+
+  .nrw-header__nav {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    margin-top: 6px;
+  }
+
+  .nrw-hero__title {
+    font-size: 40px;
+  }
+
+  .nrw-question,
+  .nrw-template .govuk-fieldset__legend.nrw-question {
+    font-size: 29px;
+  }
+
+  .nrw-template .govuk-summary-list.nrw-summary-list .govuk-summary-list__key {
+    width: auto;
+  }
+
+  .nrw-footer__links {
+    display: block;
+  }
+
+  .nrw-footer__links li {
+    margin-bottom: 12px;
+    padding-right: 0;
+    padding-left: 0;
+    border-right: 0;
+  }
+
+  .nrw-footer__meta {
+    display: block;
+  }
+
+  .nrw-footer__meta p {
+    margin-top: 18px;
+  }
+}

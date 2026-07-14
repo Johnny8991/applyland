@@ -1,0 +1,149 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% set pageName = "Check your recurring event" %}
+{% set backUrl = "/nrw/event-times" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% set repeatDayText = "Tuesday" %}
+{% if data["repeat-days"] and "monday" in data["repeat-days"] %}
+  {% set repeatDayText = "Monday" %}
+{% elif data["repeat-days"] and "wednesday" in data["repeat-days"] %}
+  {% set repeatDayText = "Wednesday" %}
+{% elif data["repeat-days"] and "thursday" in data["repeat-days"] %}
+  {% set repeatDayText = "Thursday" %}
+{% elif data["repeat-days"] and "friday" in data["repeat-days"] %}
+  {% set repeatDayText = "Friday" %}
+{% elif data["repeat-days"] and "saturday" in data["repeat-days"] %}
+  {% set repeatDayText = "Saturday" %}
+{% elif data["repeat-days"] and "sunday" in data["repeat-days"] %}
+  {% set repeatDayText = "Sunday" %}
+{% endif %}
+
+{% set repeatInterval = data["repeat-interval"] | default("1") %}
+{% set repeatPeriod = data["repeat-period"] | default("week") %}
+{% set repeatSummary = "Every " + repeatPeriod + " on " + repeatDayText %}
+{% if repeatInterval != "1" %}
+  {% set repeatSummary = "Every " + repeatInterval + " " + repeatPeriod + "s on " + repeatDayText %}
+{% endif %}
+
+{% set startDate = data["event-start-date-day"] | nrwDate(data["event-start-date-month"], data["event-start-date-year"], "23 January 2026") %}
+{% set endDate = "12 months, ending January 2027" %}
+{% if data["end-date-type"] == "specific-date" %}
+  {% set endDate = data["event-end-date-day"] | nrwDate(data["event-end-date-month"], data["event-end-date-year"], "Not provided") %}
+{% endif %}
+{% set eventStartTime = data["event-start-hour"] | default("09") | nrwTime(data["event-start-minute"] | default("30")) %}
+{% set eventEndTime = data["event-end-hour"] | default("10") | nrwTime(data["event-end-minute"] | default("30")) %}
+{% set eventTime = eventStartTime + " to " + eventEndTime %}
+{% set accessStartTime = data["access-start-hour"] | default("09") | nrwTime(data["access-start-minute"] | default("30")) %}
+{% set accessEndTime = data["access-end-hour"] | default("16") | nrwTime(data["access-end-minute"] | default("30")) %}
+{% set accessTime = accessStartTime + " to " + accessEndTime + " for each event" %}
+{% if data["access-outside-times"] == "no" %}
+  {% set accessTime = "No access outside event times" %}
+{% endif %}
+
+{% block content %}
+  <form action="/nrw/recurring-event-summary" method="post" novalidate>
+    <div class="nrw-form-width-wide">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+
+      {{
+        govukSummaryList({
+          classes: "nrw-summary-list",
+          rows: [
+            {
+              key: {
+                text: "Repeat pattern"
+              },
+              value: {
+                text: repeatSummary
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/nrw/repeat-pattern",
+                    text: "Change",
+                    visuallyHiddenText: "repeat pattern"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Start date"
+              },
+              value: {
+                text: startDate
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/nrw/event-dates",
+                    text: "Change",
+                    visuallyHiddenText: "start date"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "End date"
+              },
+              value: {
+                text: endDate
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/nrw/event-dates",
+                    text: "Change",
+                    visuallyHiddenText: "end date"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Event time"
+              },
+              value: {
+                text: eventTime
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/nrw/event-times",
+                    text: "Change",
+                    visuallyHiddenText: "event time"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Access time"
+              },
+              value: {
+                text: accessTime
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/nrw/event-times",
+                    text: "Change",
+                    visuallyHiddenText: "access time"
+                  }
+                ]
+              }
+            }
+          ]
+        })
+      }}
+    </div>
+
+    <div class="nrw-actions nrw-summary-actions">
+      <a class="nrw-button nrw-button--secondary" href="{{ backUrl }}">Back</a>
+      <button class="govuk-button nrw-button" data-module="govuk-button">Save and continue</button>
+    </div>
+  </form>
+{% endblock %}

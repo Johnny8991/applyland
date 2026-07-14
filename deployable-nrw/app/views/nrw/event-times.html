@@ -1,0 +1,140 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% set pageName = "What time does each event happen?" %}
+{% set backUrl = "/nrw/event-dates" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  {% set accessDetailsHtml %}
+    {{
+      govukDateInput({
+        id: "access-period",
+        namePrefix: "access-period",
+        fieldset: {
+          legend: {
+            text: "Access period",
+            classes: "nrw-label-strong"
+          }
+        },
+        hint: {
+          text: "For example, 23 1 2026"
+        },
+        items: [
+          {
+            name: "day",
+            classes: "govuk-input--width-2",
+            value: data["access-period-day"]
+          },
+          {
+            name: "month",
+            classes: "govuk-input--width-2",
+            value: data["access-period-month"]
+          },
+          {
+            name: "year",
+            classes: "govuk-input--width-4",
+            value: data["access-period-year"]
+          }
+        ]
+      })
+    }}
+
+    <div class="nrw-time-sections">
+      <fieldset class="govuk-fieldset nrw-time-section">
+        <legend class="govuk-fieldset__legend nrw-label-strong">Access start time</legend>
+        <div class="nrw-time-row">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="access-start-hour">Hour</label>
+            <input class="govuk-input nrw-time-input" id="access-start-hour" name="access-start-hour" type="text" inputmode="numeric" maxlength="2" value="{{ data['access-start-hour'] | default('09') }}">
+          </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="access-start-minute">Minutes</label>
+            <input class="govuk-input nrw-time-input" id="access-start-minute" name="access-start-minute" type="text" inputmode="numeric" maxlength="2" value="{{ data['access-start-minute'] | default('30') }}">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="govuk-fieldset nrw-time-section">
+        <legend class="govuk-fieldset__legend nrw-label-strong">Access end time</legend>
+        <div class="nrw-time-row">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="access-end-hour">Hour</label>
+            <input class="govuk-input nrw-time-input" id="access-end-hour" name="access-end-hour" type="text" inputmode="numeric" maxlength="2" value="{{ data['access-end-hour'] | default('16') }}">
+          </div>
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="access-end-minute">Minutes</label>
+            <input class="govuk-input nrw-time-input" id="access-end-minute" name="access-end-minute" type="text" inputmode="numeric" maxlength="2" value="{{ data['access-end-minute'] | default('30') }}">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  {% endset %}
+
+  <form action="/nrw/event-times" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+
+      <div class="nrw-time-sections">
+        <fieldset class="govuk-fieldset nrw-time-section">
+          <legend class="govuk-fieldset__legend nrw-label-strong">Event start time</legend>
+          <div class="nrw-time-row">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="event-start-hour">Hour</label>
+              <input class="govuk-input nrw-time-input" id="event-start-hour" name="event-start-hour" type="text" inputmode="numeric" maxlength="2" value="{{ data['event-start-hour'] | default('09') }}">
+            </div>
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="event-start-minute">Minutes</label>
+              <input class="govuk-input nrw-time-input" id="event-start-minute" name="event-start-minute" type="text" inputmode="numeric" maxlength="2" value="{{ data['event-start-minute'] | default('30') }}">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="govuk-fieldset nrw-time-section">
+          <legend class="govuk-fieldset__legend nrw-label-strong">Event finishing time</legend>
+          <div class="nrw-time-row">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="event-end-hour">Hour</label>
+              <input class="govuk-input nrw-time-input" id="event-end-hour" name="event-end-hour" type="text" inputmode="numeric" maxlength="2" value="{{ data['event-end-hour'] | default('10') }}">
+            </div>
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="event-end-minute">Minutes</label>
+              <input class="govuk-input nrw-time-input" id="event-end-minute" name="event-end-minute" type="text" inputmode="numeric" maxlength="2" value="{{ data['event-end-minute'] | default('30') }}">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      {{
+        govukRadios({
+          name: "access-outside-times",
+          idPrefix: "access-outside-times",
+          fieldset: {
+            legend: {
+              text: "Do you need access outside these times?",
+              classes: "nrw-label-strong"
+            }
+          },
+          items: [
+            {
+              value: "no",
+              text: "No",
+              checked: data["access-outside-times"] == "no"
+            },
+            {
+              value: "yes",
+              text: "Yes",
+              checked: data["access-outside-times"] == "yes" or not data["access-outside-times"],
+              conditional: {
+                html: accessDetailsHtml
+              }
+            }
+          ]
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

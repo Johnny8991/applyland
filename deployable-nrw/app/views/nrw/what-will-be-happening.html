@@ -1,0 +1,27 @@
+{% extends "layouts/nrw.html" %}
+
+{% set pageName = "What will be happening?" %}
+{% set backUrl = "/nrw/contact-details" %}
+{% set taskLinkText = "Go back to your applications" %}
+
+{% block content %}
+  <form action="/nrw/what-will-be-happening" method="post" novalidate>
+    <div class="nrw-form-width-wide">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+      <div class="govuk-body nrw-intro">
+        <p>Briefly describe what you would like to do. Please tell us if your activity involves:</p>
+        <ul class="nrw-bullets">
+          <li>playing music</li>
+          <li>lighting fires</li>
+        </ul>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-visually-hidden" for="activity-description">{{ pageName }}</label>
+        <textarea class="govuk-textarea nrw-textarea" id="activity-description" name="activity-description" rows="6" maxlength="1500" aria-describedby="activity-description-info">{{ data["activity-description"] }}</textarea>
+        <div id="activity-description-info" class="govuk-hint nrw-character-message" data-character-count="activity-description" data-character-limit="1500">You have 1500 characters</div>
+      </div>
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

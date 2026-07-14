@@ -1,0 +1,31 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% set pageName = "What is the name of your event?" %}
+{% set backUrl = "/nrw/applicant-type" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/event-name" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+      <p class="govuk-body">
+        <a class="govuk-link nrw-link-strong" href="https://find-and-update.company-information.service.gov.uk/" target="_blank" rel="noopener noreferrer">Check with Companies House (opens in a new tab)</a>
+      </p>
+      {{
+        govukInput({
+          id: "event-name",
+          name: "event-name",
+          value: data["event-name"],
+          label: {
+            text: pageName,
+            classes: "govuk-visually-hidden"
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

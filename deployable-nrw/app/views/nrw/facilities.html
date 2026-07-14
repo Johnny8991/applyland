@@ -1,0 +1,106 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% set pageName = "What facilities will be on NRW land?" %}
+{% set backUrl = "/nrw/what-will-be-happening" %}
+{% set taskLinkText = "Go back to your applications" %}
+
+{% block content %}
+  {% set otherFacilitiesHtml %}
+    {{
+      govukInput({
+        id: "facilities-other",
+        name: "facilities-other",
+        value: data["facilities-other"],
+        label: {
+          text: "Enter other facilities",
+          classes: "govuk-visually-hidden"
+        },
+        classes: "nrw-input-wide",
+        attributes: {
+          placeholder: "Enter"
+        }
+      })
+    }}
+  {% endset %}
+
+  <form action="/nrw/facilities" method="post" novalidate>
+    <div class="nrw-form-width">
+      {{
+        govukCheckboxes({
+          name: "facilities",
+          idPrefix: "facilities",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l nrw-question"
+            }
+          },
+          hint: {
+            text: "Select all that apply",
+            classes: "nrw-label-strong"
+          },
+          items: [
+            {
+              value: "portable-toilet",
+              text: "Portable toilet",
+              checked: "portable-toilet" in data["facilities"]
+            },
+            {
+              value: "music",
+              text: "Music",
+              checked: "music" in data["facilities"]
+            },
+            {
+              value: "trade-stands",
+              text: "Trade stands",
+              checked: "trade-stands" in data["facilities"]
+            },
+            {
+              value: "car-parking",
+              text: "Car parking",
+              checked: "car-parking" in data["facilities"]
+            },
+            {
+              value: "medics",
+              text: "Medics",
+              checked: "medics" in data["facilities"]
+            },
+            {
+              value: "catering",
+              text: "Catering",
+              checked: "catering" in data["facilities"]
+            },
+            {
+              value: "marshalls",
+              text: "Marshalls",
+              checked: "marshalls" in data["facilities"]
+            },
+            {
+              value: "generators",
+              text: "Generators",
+              checked: "generators" in data["facilities"]
+            },
+            {
+              value: "none",
+              text: "None",
+              checked: "none" in data["facilities"]
+            },
+            {
+              value: "other",
+              text: "Other",
+              checked: ("other" in data["facilities"]) or not data["facilities"],
+              conditional: {
+                html: otherFacilitiesHtml
+              }
+            }
+          ]
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

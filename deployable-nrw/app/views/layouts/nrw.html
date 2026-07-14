@@ -1,0 +1,74 @@
+{% set defaultHeroTitle = "Apply to use land" %}
+{% set bodyClasses = "nrw-template" %}
+{% set assetPath = "/plugin-assets/govuk-frontend/govuk/assets" %}
+
+{% extends "govuk/template.njk" %}
+
+{% block head %}
+  <link href="/public/stylesheets/application.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block pageTitle %}
+  {% if pageName %}{{ pageName }} - {% endif %}{{ heroTitle | default(defaultHeroTitle) }} - Natural Resources Wales
+{% endblock %}
+
+{% block header %}
+  <header class="nrw-header" role="banner">
+    <div class="nrw-width-container nrw-header__inner">
+      <a class="nrw-header__logo" href="/nrw/applicant-type" aria-label="Natural Resources Wales">
+        <img src="/public/images/nrw-logo.png" alt="Cyfoeth Naturiol Cymru Natural Resources Wales">
+      </a>
+      <nav class="nrw-header__nav" aria-label="Account and language">
+        <a href="#" class="nrw-header__link">Cymraeg</a>
+        <a href="#" class="nrw-header__link nrw-header__signin">
+          <span>Sign in</span>
+          <svg class="nrw-header__signin-icon" width="19" height="19" viewBox="0 0 19 19" focusable="false" aria-hidden="true">
+            <path d="M7 4h6v11H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+            <path d="M9 6l4 3.5L9 13M2 9.5h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+{% endblock %}
+
+{% block main %}
+  <main class="nrw-main" id="main-content">
+    <section class="nrw-hero" aria-label="{{ heroTitle | default(defaultHeroTitle) }}">
+      <div class="nrw-width-container nrw-hero__inner">
+        <h1 class="nrw-hero__title">{{ heroTitle | default(defaultHeroTitle) }}</h1>
+      </div>
+    </section>
+    <div class="nrw-width-container nrw-content">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+{% endblock %}
+
+{% block footer %}
+  <footer class="nrw-footer" role="contentinfo">
+    <div class="nrw-width-container">
+      <ul class="nrw-footer__links">
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">Privacy notice</a></li>
+        <li><a href="#">Welsh Language Standards</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+      <div class="nrw-footer__rule"></div>
+      <div class="nrw-footer__meta">
+        <img src="/public/images/nrw-logo-footer.png" alt="Natural Resources Wales">
+        <p>&copy; Natural Resources Wales</p>
+      </div>
+    </div>
+  </footer>
+{% endblock %}
+
+{% block bodyEnd %}
+  {% for scriptConfig in pluginConfig.scripts %}
+    {% if scriptConfig.type|length %}
+      <script type="{{ scriptConfig.type }}" src="{{ scriptConfig.src }}"></script>
+    {% else %}
+      <script src="{{ scriptConfig.src }}"></script>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

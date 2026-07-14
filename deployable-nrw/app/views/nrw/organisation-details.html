@@ -1,0 +1,64 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% set pageName = "What are your organisation's details" %}
+{% set backUrl = "/nrw/charity-number" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/organisation-details" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+      <p class="govuk-body nrw-label-strong">Enter details</p>
+
+      {% set requiredHtml %}<span class="nrw-required">*</span>{% endset %}
+
+      {{
+        govukInput({
+          id: "organisation-name",
+          name: "organisation-name",
+          value: data["organisation-name"],
+          label: {
+            html: "Organisation's name " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "organisation-address",
+          name: "organisation-address",
+          value: data["organisation-address"],
+          label: {
+            html: "Address " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "organisation-town",
+          name: "organisation-town",
+          value: data["organisation-town"],
+          label: {
+            html: "Town or city " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+      {{
+        govukInput({
+          id: "organisation-postcode",
+          name: "organisation-postcode",
+          value: data["organisation-postcode"],
+          label: {
+            html: "Postcode " + requiredHtml
+          },
+          classes: "nrw-input-wide"
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

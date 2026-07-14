@@ -1,0 +1,81 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% set pageName = "What type of applicant are you?" %}
+{% set backUrl = "/" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  <form action="/nrw/applicant-type" method="post" novalidate>
+    <div class="nrw-form-width">
+      {{
+        govukRadios({
+          name: "applicant-type",
+          idPrefix: "applicant-type",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l nrw-question"
+            }
+          },
+          hint: {
+            text: "Select",
+            classes: "nrw-label-strong"
+          },
+          items: [
+            {
+              value: "company-small-business",
+              text: "Company/ small business",
+              checked: data["applicant-type"] == "company-small-business"
+            },
+            {
+              value: "charity",
+              text: "Charity",
+              checked: data["applicant-type"] == "charity"
+            },
+            {
+              value: "community-interest-company",
+              text: "Community interest company",
+              checked: data["applicant-type"] == "community-interest-company" or not data["applicant-type"]
+            },
+            {
+              value: "club-institute-association",
+              text: "Club institute or association",
+              checked: data["applicant-type"] == "club-institute-association"
+            },
+            {
+              value: "public-body",
+              text: "Public Body (for example university)",
+              checked: data["applicant-type"] == "public-body"
+            },
+            {
+              value: "other",
+              text: "Other",
+              checked: data["applicant-type"] == "other"
+            }
+          ]
+        })
+      }}
+
+      {{
+        govukInput({
+          id: "applicant-type-other",
+          name: "applicant-type-other",
+          value: data["applicant-type-other"],
+          label: {
+            text: "Enter other applicant type",
+            classes: "govuk-visually-hidden"
+          },
+          classes: "nrw-input-wide",
+          attributes: {
+            placeholder: "Enter"
+          }
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "layouts/nrw.html" %}
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% set pageName = "When should it start and end?" %}
+{% set backUrl = "/nrw/repeat-pattern" if data["recurring-event"] != "no" else "/nrw/when-use-land" %}
+{% set taskLinkText = "Go back to task list" %}
+
+{% block content %}
+  {% set endDateHtml %}
+    {{
+      govukDateInput({
+        id: "event-end-date",
+        namePrefix: "event-end-date",
+        fieldset: {
+          legend: {
+            text: "End date",
+            classes: "nrw-label-strong"
+          }
+        },
+        hint: {
+          text: "For example, 23 1 2027"
+        },
+        items: [
+          {
+            name: "day",
+            classes: "govuk-input--width-2",
+            value: data["event-end-date-day"]
+          },
+          {
+            name: "month",
+            classes: "govuk-input--width-2",
+            value: data["event-end-date-month"]
+          },
+          {
+            name: "year",
+            classes: "govuk-input--width-4",
+            value: data["event-end-date-year"]
+          }
+        ]
+      })
+    }}
+  {% endset %}
+
+  <form action="/nrw/event-dates" method="post" novalidate>
+    <div class="nrw-form-width">
+      <h2 class="govuk-heading-l nrw-question">{{ pageName }}</h2>
+
+      {{
+        govukDateInput({
+          id: "event-start-date",
+          namePrefix: "event-start-date",
+          fieldset: {
+            legend: {
+              text: "Start date",
+              classes: "nrw-label-strong"
+            }
+          },
+          hint: {
+            text: "For example, 23 1 2026"
+          },
+          items: [
+            {
+              name: "day",
+              classes: "govuk-input--width-2",
+              value: data["event-start-date-day"]
+            },
+            {
+              name: "month",
+              classes: "govuk-input--width-2",
+              value: data["event-start-date-month"]
+            },
+            {
+              name: "year",
+              classes: "govuk-input--width-4",
+              value: data["event-start-date-year"]
+            }
+          ]
+        })
+      }}
+
+      {{
+        govukInsetText({
+          text: "Recurring events can last up to 12 months. The latest end date is 23 January 2027.",
+          classes: "nrw-inset-text"
+        })
+      }}
+
+      {{
+        govukRadios({
+          name: "end-date-type",
+          idPrefix: "end-date-type",
+          fieldset: {
+            legend: {
+              text: "When should it end?",
+              classes: "nrw-label-strong"
+            }
+          },
+          items: [
+            {
+              value: "after-12-months",
+              text: "After 12 months",
+              checked: data["end-date-type"] == "after-12-months" or not data["end-date-type"]
+            },
+            {
+              value: "specific-date",
+              text: "On a specific date",
+              checked: data["end-date-type"] == "specific-date",
+              conditional: {
+                html: endDateHtml
+              }
+            }
+          ]
+        })
+      }}
+    </div>
+
+    {% include "nrw/includes/actions.html" %}
+  </form>
+{% endblock %}

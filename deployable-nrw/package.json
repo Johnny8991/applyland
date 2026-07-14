@@ -1,0 +1,17 @@
+{
+  "name": "deployable-nrw",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "govuk-prototype-kit dev",
+    "serve": "govuk-prototype-kit serve",
+    "start": "govuk-prototype-kit start"
+  },
+  "dependencies": {
+    "govuk-frontend": "5.11.0",
+    "govuk-prototype-kit": "13.20.1"
+  },
+  "engines": {
+    "node": "^16.x || ^18.x || >= 20.x"
+  }
+}
