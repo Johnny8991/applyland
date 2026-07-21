@@ -1,17 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "framework": "express",
   "buildCommand": "npm run vercel-build",
   "functions": {
-    "server.js": {
-      "includeFiles": "{app/**,.tmp/**}"
+    "api/index.js": {
+      "includeFiles": "{app/**,.tmp/**,server.js}"
     }
   },
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/server.js"
+      "destination": "/api"
     }
   ]
 }
