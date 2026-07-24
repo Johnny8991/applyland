@@ -5,7 +5,7 @@
   "outputDirectory": null,
   "functions": {
     "api/index.js": {
-      "includeFiles": "{app/**,.tmp/**,server.js}"
+      "includeFiles": "{app/**,.tmp/**,server.js,package.json}"
     }
   },
   "rewrites": [
